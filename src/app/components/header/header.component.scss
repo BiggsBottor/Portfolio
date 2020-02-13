@@ -1,0 +1,12 @@
+ @import "../../../assets/colors.scss";
+
+
+.a_white {
+    color: white;
+    // text-decoration: none;
+    &:hover {
+        color: $teal-dark;
+
+        text-decoration: none;     
+    }
+}

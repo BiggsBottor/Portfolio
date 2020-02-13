@@ -1,0 +1,128 @@
+<!-- Contact Section -->
+<section class="page-section">
+    <div class="container">
+
+      <!-- Contact Section Heading -->
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
+
+      <!-- Icon Divider -->
+      <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="divider-custom-line"></div>
+      </div>
+
+      <!-- Contact Section Form -->
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <!-- TODO: configurar correo -->
+          <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+          <form [formGroup]="forma" #f="ngForm" (ngSubmit)="onSubmit()" name="sentMessage" id="contactForm">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label [ngClass]="{'text-danger': !f.form.controls.name.valid}">Name</label>
+                <input formControlName="name"                       
+                       (keyup)="onChange(f.form.value.name, 'name')"
+                       (focus)="onFocus('name')"
+                       (blur)="onBlur('name')"
+                       class="form-control"
+                       id="name"
+                       name="name"
+                       type="text"
+                       placeholder="Name">                
+                <p class="help-block text-danger">
+                  <span *ngIf="!f.form.controls.name.valid && hasErrors">                    
+                    <ul role="alert">
+                      <li>{{ nameError }}</li>
+                    </ul>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label [ngClass]="{'text-danger': !f.form.controls.email.valid}">Email Address</label>
+                <input formControlName="email"
+                       (keyup)="onChange(f.form.value.email, 'email')"
+                       (focus)="onFocus('email')"
+                       (blur)="onBlur('email')"
+                       class="form-control"
+                       id="email"
+                       name="email"
+                       type="email"
+                       placeholder="Email Address">
+                <p class="help-block text-danger">
+                  <span *ngIf="!f.form.controls.email.valid && hasErrors">                    
+                    <ul role="alert">
+                      <li>{{ emailError }}</li>
+                    </ul>
+                  </span>
+                </p>                
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label [ngClass]="{'text-danger': !f.form.controls.phone.valid}">Phone Number</label>
+                <input formControlName="phone"
+                       (keyup)="onChange(f.form.value.phone, 'phone')"
+                       (focus)="onFocus('phone')"
+                       (blur)="onBlur('phone')"
+                       class="form-control"
+                       id="phone"
+                       name="phone"
+                       type="tel"
+                       placeholder="Phone Number">
+                <p class="help-block text-danger">
+                  <span *ngIf="!f.form.controls.phone.valid && hasErrors">                    
+                    <ul role="alert">
+                      <li>{{ phoneError }}</li>
+                    </ul>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label [ngClass]="{'text-danger': !f.form.controls.message.valid}">Message</label>
+                <textarea formControlName="message"
+                          (keyup)="onChange(f.form.value.message, 'message')"
+                          (focus)="onFocus('message')"
+                          (blur)="onBlur('message')"
+                          class="form-control"
+                          id="message"
+                          name="message"
+                          rows="5"
+                          placeholder="Message"></textarea>
+                <p class="help-block text-danger">
+                  <span *ngIf="!f.form.controls.message.valid && hasErrors">                    
+                    <ul role="alert">
+                      <li>{{ messageError }}</li>
+                    </ul>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <br>
+            <div id="success">
+              <!-- TODO: arreglar el mensaje de error al emviar erroneamente el mensaje -->
+              <div *ngIf="f.form.valid && !hasErrors && isSubmited" class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Sorry {{ f.form.value.name }}, it seems that my mail server is not responding. Please try again later!</strong>
+              </div>
+            </div>
+            <div class="form-group">
+                 <!-- [disabled]="!f.form.valid" 
+                      [ngClass]="{'btn-disabled': !f.form.valid}" -->
+              <button [ngClass]="{'btn-danger': !f.form.valid && isSubmited}"
+                      type="submit"
+                      class="btn btn-primary btn-xl"
+                      id="sendMessageButton">Send</button> 
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>

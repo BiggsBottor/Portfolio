@@ -1,0 +1,24 @@
+<div id="page-top" appScrollspy [spiedTags]="['DIV']" (sectionChange)="onSectionChange($event)" [ngClass]="{'modal-open': f.isModalOpen}">
+
+  <app-navbar></app-navbar>
+  <div id="top">&nbsp;</div>
+
+  <div id="header">&nbsp;</div>
+  <app-header></app-header>
+  
+  <div id="portfolio">&nbsp;</div>
+  <app-portfolio></app-portfolio>
+
+  <div id="about">&nbsp;</div>
+  <app-about></app-about>
+
+  <div id="contact">&nbsp;</div>
+  <app-contact></app-contact>
+
+  <app-footer></app-footer>
+
+  <app-modal></app-modal>
+
+  <div *ngIf="f.isModalOpen" class="modal-backdrop fade show"></div>
+  
+</div>
