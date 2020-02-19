@@ -13,11 +13,13 @@ export class ContactComponent {
   isSubmited: boolean;
   validEmail = '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\.[A-Za-z]{2,4}'; // a@a.aa
   validPhone = '^((\\+{1})*)+(([0-9]{1,3})*)+([0-9]{9})$'; // https://regexr.com/ visit this to check the pattern
+  subjectTopics = ['', 'contact', 'job', 'suggestions', 'other'];
 
   // error message variables
   nameError: string;
   emailError: string;
   phoneError: string;
+  subjectError: string;
   messageError: string;
 
   constructor() {
@@ -27,6 +29,7 @@ export class ContactComponent {
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.validEmail)]),
       phone: new FormControl('', [Validators.required, Validators.pattern(this.validPhone)]),
+      subject: new FormControl('', Validators.required),
       message: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
   }
@@ -47,6 +50,9 @@ export class ContactComponent {
       }
       if (this.forma.controls.phone.errors != null) {
         console.log('phone error:' , this.forma.controls.phone.errors);
+      }
+      if (this.forma.controls.subject.errors != null) {
+        console.log('subject error:' , this.forma.controls.subject.errors);
       }
       if (this.forma.controls.message.errors != null) {
         console.log('message error:' , this.forma.controls.message.errors);
@@ -79,6 +85,13 @@ export class ContactComponent {
         }
       }
 
+      // subject error messages
+      if (this.forma.controls.subject.errors != null) {
+        if (this.forma.controls.subject.errors.required) {
+          this.subjectError = 'Please select a subject.';
+        }
+      }
+
       // message error messages
       if (this.forma.controls.message.errors != null) {
         if (this.forma.controls.message.errors.required) {
@@ -90,7 +103,7 @@ export class ContactComponent {
     } else {
       this.hasErrors = false;
       this.isSubmited = true;
-      console.log(this.forma);
+      console.log('is submited', this.isSubmited, this.forma);
     }
   }
 

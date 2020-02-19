@@ -85,6 +85,27 @@
             </div>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Subject</label>
+                <select formControlName="subject"
+                       (click)="onChange(f.form.value.subject, 'subject')"
+                       (focus)="onFocus('subject')"
+                       (blur)="onBlur('subject')"
+                       class="form-control my-3"
+                       id="subject"
+                       name="subject">
+                  <option *ngFor="let topic of subjectTopics">{{ topic }}</option>       
+                </select>
+                <p class="help-block text-danger">
+                  <span *ngIf="!f.form.controls.subject.valid && hasErrors">                    
+                    <ul role="alert">
+                      <li>{{ subjectError }}</li>
+                    </ul>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
                 <label [ngClass]="{'text-danger': !f.form.controls.message.valid}">Message</label>
                 <textarea formControlName="message"
                           (keyup)="onChange(f.form.value.message, 'message')"
@@ -106,16 +127,14 @@
             </div>
             <br>
             <div id="success">
-              <!-- TODO: arreglar el mensaje de error al emviar erroneamente el mensaje -->
+              <!-- TODO: arreglar el mensaje de error al enviar erroneamente el mensaje -->
               <div *ngIf="f.form.valid && !hasErrors && isSubmited" class="alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <strong>Sorry {{ f.form.value.name }}, it seems that my mail server is not responding. Please try again later!</strong>
               </div>
             </div>
             <div class="form-group">
-                 <!-- [disabled]="!f.form.valid" 
-                      [ngClass]="{'btn-disabled': !f.form.valid}" -->
-              <button [ngClass]="{'btn-danger': !f.form.valid && isSubmited}"
+              <button [ngClass]="{'btn-danger': !f.form.valid}"
                       type="submit"
                       class="btn btn-primary btn-xl"
                       id="sendMessageButton">Send</button> 
