@@ -17,8 +17,6 @@
       <!-- Contact Section Form -->
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <!-- TODO: configurar correo -->
-          <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
           <form [formGroup]="forma" #f="ngForm" (ngSubmit)="onSubmit()" name="sentMessage" id="contactForm">
             <div class="control-group">
               <div class="form-group floating-label-form-group controls mb-0 pb-2">
@@ -31,6 +29,7 @@
                        id="name"
                        name="name"
                        type="text"
+                       maxlength="30"
                        placeholder="Name">                
                 <p class="help-block text-danger">
                   <span *ngIf="!f.form.controls.name.valid && hasErrors">                    
@@ -52,6 +51,7 @@
                        id="email"
                        name="email"
                        type="email"
+                       maxlength="30"
                        placeholder="Email Address">
                 <p class="help-block text-danger">
                   <span *ngIf="!f.form.controls.email.valid && hasErrors">                    
@@ -73,6 +73,7 @@
                        id="phone"
                        name="phone"
                        type="tel"
+                       maxlength="13"
                        placeholder="Phone Number">
                 <p class="help-block text-danger">
                   <span *ngIf="!f.form.controls.phone.valid && hasErrors">                    
@@ -115,6 +116,7 @@
                           id="message"
                           name="message"
                           rows="5"
+                          maxlength="350"
                           placeholder="Message"></textarea>
                 <p class="help-block text-danger">
                   <span *ngIf="!f.form.controls.message.valid && hasErrors">                    
@@ -127,14 +129,20 @@
             </div>
             <br>
             <div id="success">
-              <!-- TODO: arreglar el mensaje de error al enviar erroneamente el mensaje -->
-              <div *ngIf="f.form.valid && !hasErrors && isSubmited" class="alert alert-danger">
+              <!-- if is not send -->
+              <div *ngIf="f.form.valid && !hasErrors && isSubmited && !isSent" class="alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <strong>Sorry {{ f.form.value.name }}, it seems that my mail server is not responding. Please try again later!</strong>
+                <!-- <strong>Sorry {{ f.form.value.name }}, it seems that my mail server is not responding. Please try again later!</strong> -->
+                <strong>Sorry {{ f.form.value.name }}, but this feature is not working yet. Please try again later!</strong>
+              </div>
+              <!-- if is send -->
+              <div *ngIf="f.form.valid && !hasErrors && isSubmited && isSent" class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>thanks, {{ f.form.value.name }}, your message has been sent. I'll contact you as soon as possible</strong>
               </div>
             </div>
             <div class="form-group">
-              <button [ngClass]="{'btn-danger': !f.form.valid}"
+              <button [ngClass]="{'btn-danger': !f.valid}"
                       type="submit"
                       class="btn btn-primary btn-xl"
                       id="sendMessageButton">Send</button> 

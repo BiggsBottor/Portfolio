@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ContactService } from '../../services/contact.service';
+import { Contact } from '../../models/contact';
 
 @Component({
   selector: 'app-contact',
@@ -11,9 +13,10 @@ export class ContactComponent {
   forma: FormGroup;
   hasErrors: boolean;
   isSubmited: boolean;
+  isSent: boolean;
   validEmail = '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\.[A-Za-z]{2,4}'; // a@a.aa
   validPhone = '^((\\+{1})*)+(([0-9]{1,3})*)+([0-9]{9})$'; // https://regexr.com/ visit this to check the pattern
-  subjectTopics = ['', 'contact', 'job', 'suggestions', 'other'];
+  subjectTopics = ['', 'contact', 'job', 'suggestions', 'other']; // maxLength(15)
 
   // error message variables
   nameError: string;
@@ -22,9 +25,10 @@ export class ContactComponent {
   subjectError: string;
   messageError: string;
 
-  constructor() {
+  constructor(private cs: ContactService) {
     this.hasErrors = false;
     this.isSubmited = false;
+    this.isSent = false;
     this.forma = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.validEmail)]),
@@ -41,25 +45,9 @@ export class ContactComponent {
 
       this.nameError = this.emailError = this.phoneError = this.messageError = '';
 
-      // show error on console
-      if (this.forma.controls.name.errors != null) {
-        console.log('name error:' , this.forma.controls.name.errors);
-      }
-      if (this.forma.controls.email.errors != null) {
-        console.log('email error:' , this.forma.controls.email.errors);
-      }
-      if (this.forma.controls.phone.errors != null) {
-        console.log('phone error:' , this.forma.controls.phone.errors);
-      }
-      if (this.forma.controls.subject.errors != null) {
-        console.log('subject error:' , this.forma.controls.subject.errors);
-      }
-      if (this.forma.controls.message.errors != null) {
-        console.log('message error:' , this.forma.controls.message.errors);
-      }
-
       // name error messages
       if (this.forma.controls.name.errors != null) {
+        console.log('name error:' , this.forma.controls.name.errors);
         if (this.forma.controls.name.errors.required) {
           this.nameError = 'Please enter your name.';
         } else if (this.forma.controls.name.errors.minlength.actualLength < 3) {
@@ -69,6 +57,7 @@ export class ContactComponent {
 
       // email error messages
       if (this.forma.controls.email.errors != null) {
+        console.log('email error:' , this.forma.controls.email.errors);
         if (this.forma.controls.email.errors.required) {
           this.emailError = 'Please enter your email address.';
         } else if (this.forma.controls.email.errors.pattern) {
@@ -78,6 +67,7 @@ export class ContactComponent {
 
       // phone error messages
       if (this.forma.controls.phone.errors != null) {
+        console.log('phone error:' , this.forma.controls.phone.errors);
         if (this.forma.controls.phone.errors.required) {
           this.phoneError = 'Please enter your phone number.';
         } else if (this.forma.controls.phone.errors.pattern) {
@@ -87,6 +77,7 @@ export class ContactComponent {
 
       // subject error messages
       if (this.forma.controls.subject.errors != null) {
+        console.log('subject error:' , this.forma.controls.subject.errors);
         if (this.forma.controls.subject.errors.required) {
           this.subjectError = 'Please select a subject.';
         }
@@ -94,6 +85,7 @@ export class ContactComponent {
 
       // message error messages
       if (this.forma.controls.message.errors != null) {
+        console.log('message error:' , this.forma.controls.message.errors);
         if (this.forma.controls.message.errors.required) {
           this.messageError = 'Please enter a message.';
         } else if (this.forma.controls.message.errors.minlength.actualLength < 5) {
@@ -103,7 +95,19 @@ export class ContactComponent {
     } else {
       this.hasErrors = false;
       this.isSubmited = true;
-      console.log('is submited', this.isSubmited, this.forma);
+      // TODO: add a feature to change to true if is send it
+      this.isSent = false;
+      // console.log('is submited', this.isSubmited, this.forma); // test only
+      const contact = new Contact(
+                                  this.forma.controls.name.value,
+                                  this.forma.controls.email.value,
+                                  this.forma.controls.phone.value,
+                                  this.forma.controls.subject.value,
+                                  this.forma.controls.message.value
+                                  );
+      // console.log(contact);
+      this.cs.contact = contact;
+      this.cs.sendEmail();
     }
   }
 

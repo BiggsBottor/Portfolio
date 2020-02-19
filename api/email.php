@@ -47,7 +47,8 @@ case("POST"): //Send the email;
     $header = "From: $name <$email>";
 
     if (!mail($to, $subject, $body, $header)) { 
-        http_response_code(500); 
+        // http_response_code(500); 
+        echo 'mail not send';
     }
         
     break;
