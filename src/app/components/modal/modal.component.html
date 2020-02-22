@@ -28,21 +28,23 @@
                   <div class="divider-custom-line"></div>
                 </div>
                 <!-- Portfolio Modal - Image -->
-                <img class="img-fluid rounded mb-5" src="assets/freelancer/img/portfolio/{{ img }}.png" alt="{{ img }}">
+                <img class="img-fluid rounded mb-5" src="{{ imagePath(i) }}{{ img }}.png" alt="{{ img }}">
                 <!-- Portfolio Modal - Text -->
-                <!-- TODO: añadir un texto del adecuado a cada modal. -->
                 <p class="mb-5">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-                </p>
+                  {{ f.isDefaultImg[i] | getModalText: i }}
+                  <br>
+                  <a class="d-inline-block mt-3" href="{{ f.isDefaultImg[i] | getModalLink: i }}" target="_blank">More Info</a>
+                </p>                
                 <button (click)="closeModal(i)"
                         class="btn btn-primary" type="button">
                   <i class="fas fa-times fa-fw"></i>
                   Close Window
                 </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+              </div> <!-- col-lg-8 -->
+            </div> <!-- row -->
+          </div> <!-- container -->
+        </div> <!-- modal-body -->
+      </div> <!-- modal-content -->
+    </div> <!-- modal-dialog -->
+  </div> <!-- portfolio-modal -->
+  

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ModalText } from '../models/modal-text';
+import * as ModalTextJSON from '../../assets/json/modal-text.json';
 
 
 @Injectable({
@@ -6,13 +8,33 @@ import { Injectable } from '@angular/core';
 })
 export class FunctionsService {
 
-  // this array manage de portfolio files name. TODO: replace with real portfolio names
-  public tempImgs: string [] = ['cabin', 'cake', 'circus', 'game', 'safe', 'submarine'];
+  // this array manage de portfolio files name.
+  // public tempImgs: string [] = ['cabin', 'cake', 'circus', 'game', 'safe', 'submarine']; // all default imgs
+  public tempImgs: string [] = ['portfolio', 'Pacman3D', 'condorchem', 'pirobloc', 'marketinglabs', 'game']; // all default imgs
+  public isDefaultImg: boolean [] = [false, false, false, false, false, true];
+
   public isModalOpen = false;
+
+  public defaultPath = 'assets/freelancer/img/portfolio/';
+  public imgPath = 'assets/img/';
+
+  public allModalTexts: ModalText [] = [];
+
   // for scrollSpy directive
   currentSection = 'top';
 
-  constructor() {}
+  constructor() {
+    this.allModalTexts = (ModalTextJSON as any).default;
+  }
+
+  // return the right image path
+  imagePath(i: number): string {
+    if (this.isDefaultImg[i]) {
+      return this.defaultPath;
+    } else {
+      return this.imgPath;
+    }
+  }
 
   // id #portfolioModal1
   portfolioModalNumber(i: number): string {

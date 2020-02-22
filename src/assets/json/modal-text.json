@@ -1,0 +1,32 @@
+[
+    {
+        "name": "default",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.",
+        "link": "/"
+    },
+    {
+        "name": "portfolio",
+        "text": "Web Page, based in the freelancer bootstrap theme, made mainly in Angular 8, but added some PHP for the contact form",
+        "link": "https://github.com/BiggsBottor/Portfolio"
+    },
+    {
+        "name": "Pacman3D",
+        "text": "Technic demo of the famous old game Pac-man, made in Unity and the scripts files in C#, the Pacman model is not mine and the ghost models are made, mainly by my teacher. but I added the eyes movement on the game's production. Due to lack of time, the ghost I.As it's just a premade path.",
+        "link": "https://www.youtube.com/watch?v=yzrkWJAhnac"
+    },
+    {
+        "name": "condorchem",
+        "text": "Project collaboration, made in Wordpress. added some features, but mainly added some multilanguage content",
+        "link": "https://condorchem.com/es/"
+    },
+    {
+        "name": "pirobloc",
+        "text": "Project collaboration, made in Wordpress. added some features, but mainly added some multilanguage content",
+        "link": "https://www.pirobloc.com/"
+    },
+    {
+        "name": "marketinglabs",
+        "text": "Project collaboration, made in Wordpress. Installation, configuration and modding some theme features. Modified some PHP files to add more crew pics.",
+        "link": "https://marketinglabs.agency/"
+    }
+]

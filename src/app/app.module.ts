@@ -17,6 +17,10 @@ import { ModalComponent } from './components/modal/modal.component';
 // Directives
 import { ScrollspyDirective } from './directives/scrollspy.directive';
 
+// Custom Pipes
+import { GetModalTextPipe } from './pipes/get-modal-text.pipe';
+import { GetModalLinkPipe } from './pipes/get-modal-link.pipe';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import { ScrollspyDirective } from './directives/scrollspy.directive';
     ContactComponent,
     FooterComponent,
     ModalComponent,
-    ScrollspyDirective
+    ScrollspyDirective,
+    GetModalTextPipe,
+    GetModalLinkPipe
   ],
   imports: [
     BrowserModule,

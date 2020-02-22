@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FunctionsService } from 'src/app/services/functions.service';
 
 @Component({
@@ -6,20 +6,22 @@ import { FunctionsService } from 'src/app/services/functions.service';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss']
 })
-export class PortfolioComponent implements OnInit {
+export class PortfolioComponent {
 
   tempImgs: string[] = [];
+  imgPath: string;
 
   constructor(public f: FunctionsService) {
     this.tempImgs = f.tempImgs;
   }
 
-  ngOnInit() {
-  }
-
   openModal(i: number) {
     const modal = this.f.portfolioModalNumber(i);
     this.f.modalManager(modal, true);
+  }
+
+  imagePath(i: number): string {
+    return this.imgPath = this.f.imagePath(i);
   }
 
 }
