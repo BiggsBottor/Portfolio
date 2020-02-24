@@ -10,7 +10,7 @@ export class FunctionsService {
 
   // this array manage de portfolio files name.
   // public tempImgs: string [] = ['cabin', 'cake', 'circus', 'game', 'safe', 'submarine']; // all default imgs
-  public tempImgs: string [] = ['portfolio', 'Pacman3D', 'condorchem', 'pirobloc', 'marketinglabs', 'game']; // all default imgs
+  public tempImgs: string [] = ['portfolio', 'Pacman3D', 'libreria', 'pirobloc', 'marketinglabs', 'game']; // all default imgs
   public isDefaultImg: boolean [] = [false, false, false, false, false, true];
 
   public isModalOpen = false;
